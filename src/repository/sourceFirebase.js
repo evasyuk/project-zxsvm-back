@@ -1,5 +1,6 @@
-import { WrongArgument, UserAlreadyExists } from '../error'
+import { WrongArgument, UserAlreadyExists, NotInitialized } from '../error'
 import CryptoHelper from "../helper/DataProtect";
+import User from '../model/User'
 
 let admin
 let cryptoHelper
@@ -13,52 +14,64 @@ class SourceFirebase {
 
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
-            databaseURL: moduleConfig.databaseCredStr,
+            databaseURL: moduleConfig.databaseURL,
         });
 
-        SourceFirebase.userRef = admin.database().ref('server/users')
+        SourceFirebase.userRef = admin.database().ref('/users')
+        SourceFirebase.initialized = true
     }
 
     checkUserExists = async (email) => {
+        if (!SourceFirebase.initialized) {
+            throw new NotInitialized('SourceFirebase')
+        }
         if (!email || typeof email !== 'string') {
-            throw new WrongArgument()
+            throw new WrongArgument('email')
         }
 
-        const emailHash = await cryptoHelper.encryptStr(email)
+        const emailHash = email.toBase64()
 
-        await SourceFirebase.userRef.orderByKey().equalTo(emailHash)
+        const isEqual = await SourceFirebase.userRef
+            .orderByKey()
+            .equalTo(emailHash)
+            .once("value")
+            .val
 
+        console.log('isEqual', isEqual)
+
+        return Boolean(isEqual)
     }
 
     createUser = async (email, name, password) => {
-        if (!email || typeof email !== 'string') {
-            throw new WrongArgument()
-        }
-        if (!name || typeof name !== 'string') {
-            throw new WrongArgument()
-        }
-        if (!password || typeof password !== 'string') {
-            throw new WrongArgument()
+        if (!SourceFirebase.initialized) {
+            throw new NotInitialized('SourceFirebase')
         }
 
-        if (await this.checkUserExists()) {
+        if (!email || typeof email !== 'string') {
+            throw new WrongArgument('email')
+        }
+        if (!name || typeof name !== 'string') {
+            throw new WrongArgument('name')
+        }
+        if (!password || typeof password !== 'string') {
+            throw new WrongArgument('password')
+        }
+
+        if (await this.checkUserExists(email)) {
             throw new UserAlreadyExists()
         }
 
         const emailHash = await cryptoHelper.encryptStr(email)
-        const passwordHash = await cryptoHelper.encryptStr(password)
+        const passwordHash = await cryptoHelper.generatePassword(password)
         const nameHash = await cryptoHelper.encryptStr(name)
 
-        await SourceFirebase.userRef.push().set({
-            email: emailHash,
-            password: passwordHash,
-            name: nameHash,
+        return SourceFirebase.userRef.push().set({
+            uid: 'uid',
         })
+
+        return new User({ email, name })
     }
 
-    checkUserPassword = () => {
-
-    }
 }
 
 export default SourceFirebase

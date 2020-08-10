@@ -1,15 +1,9 @@
-import "@babel/polyfill"
+import "@babel/polyfill";
+import "./src/helper/ObjectEnhancer";
+import { loadCfg } from "./src/helper/DotEnv";
+import ModuleConfig from "./src/ModuleConfig";
 
-import Koa from "koa"
+loadCfg()
+ModuleConfig.init()
 
-import applyMiddlewares from "./src/middlewares"
-import applyAllRoutes from "./src/routes"
-
-const app = new Koa()
-
-applyMiddlewares(app)
-applyAllRoutes(app)
-
-app.listen(9339, () => {
-    console.log("node task planner started")
-})
+require('./src/App')

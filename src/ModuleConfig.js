@@ -2,9 +2,13 @@ import { EnvSetupError } from './error'
 
 class ModuleConfig {
     static init({
-        databaseURL = process.env.DB_URL,
-        databaseCredStr = process.env.DB_CERT,
-        databaseSeed = process.env.DB_SEED
+        databaseURL,
+        databaseCredStr,
+        databaseSeed,
+    } = {
+        databaseURL: process.env.DB_URL,
+        databaseCredStr: process.env.DB_CERT,
+        databaseSeed: process.env.DB_SEED
     }) {
 
         if (!databaseURL) {
