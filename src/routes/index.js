@@ -1,13 +1,7 @@
-import Router from "koa-router"
-import Hello from './PIng'
-
-const router = new Router()
-
-router.get("/hello", Hello)
+import helloRoutes from './hello'
 
 const getAllRoutes = (app) => {
-    // Routes
-    app.use(router.routes()).use(router.allowedMethods())
+    helloRoutes.withApp(app)
 }
 
 export default getAllRoutes

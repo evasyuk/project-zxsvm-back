@@ -8,6 +8,7 @@ const app = new Koa()
 applyMiddlewares(app)
 applyAllRoutes(app)
 
-app.listen(9339, () => {
-    console.log("node task planner started")
+const PORT = 9339
+app.listen(PORT, () => {
+    console.log(`node task planner started on port [${PORT}]`)
 })
