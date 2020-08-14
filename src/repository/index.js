@@ -1,3 +1,5 @@
-import SourceFirebase from './sourceFirebase'
+import RepoUser from "./RepoUser";
 
-SourceFirebase.init()
+export {
+    RepoUser,
+}

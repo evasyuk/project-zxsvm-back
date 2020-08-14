@@ -19,7 +19,7 @@ class Executable {
 
     // Example:
     //
-    // const defaultContextBuilder = ctx => (ctx.state.user || {})
+    // const defaultContextBuilder = ctx => (ctx.state.session || {})
     static contextBuilder() {}
 
     async run(params) {

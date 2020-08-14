@@ -1,14 +1,17 @@
+import SQLiteRepo from './sqlite3'
+
 class RepoUser {
-    static init = (source) => {
-        RepoUser.source = source
+    async getUserByEmail (email) {
+        return SQLiteRepo.getUserByEmail(email)
     }
 
-    verifyLogin = async (emailToCheck) => {
-        await RepoUser.source.checkUserExists(emailToCheck)
+    async createUser (name, email, password) {
+        return SQLiteRepo.createUser(name, email, password)
     }
 
-    registration = (user) => {
-
+    async deleteUser (email) {
+        return SQLiteRepo.deleteUser(email)
     }
-
 }
+
+export default new RepoUser()

@@ -27,6 +27,20 @@ class MyRouter {
         router.get(name, withAction(executable))
     }
 
+    post = (name, executable, options = {
+        authEnabled: false,
+    }) => {
+        if (!name || typeof name != 'string') {
+            throw new WrongArgument('name')
+        }
+
+        if (!executable || !(executable['__proto__'].name === 'Executable')) {
+            throw new WrongArgument('executable')
+        }
+
+        router.post(name, withAction(executable))
+    }
+
     withApp = (app) => {
         app.use(router.routes()).use(router.allowedMethods())
     }

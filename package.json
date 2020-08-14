@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",
-    "firebase-admin": "^9.0.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
@@ -20,7 +20,8 @@
     "koa-logger": "^3.2.1",
     "koa-router": "^9.1.0",
     "livr": "^2.3.1",
-    "livr-extra-rules": "^1.2.1"
+    "livr-extra-rules": "^1.2.1",
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",

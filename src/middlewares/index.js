@@ -1,5 +1,6 @@
 import logger from "koa-logger"
 import json from "koa-json"
+import bodyParser from "koa-bodyparser"
 
 const applyMiddlewares = (app) => {
 
@@ -10,6 +11,7 @@ const applyMiddlewares = (app) => {
         const ms = Date.now() - start;
         ctx.set('X-Response-Time', `${ms}ms`);
     });
+    app.use(bodyParser())
     app.use(json())
     app.use(logger({
         transporter: (str, args) => {
