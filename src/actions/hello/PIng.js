@@ -1,16 +1,21 @@
 import Exe from '../../helper/router/Exe'
 
 class Ping extends Exe {
-    async execute() {
+    static validationRules = {
+        test: 'required',
+    }
+
+    static paramsBuilder = (ctx) => ({
+        test: ctx.query.test
+    })
+
+    async execute(params) {
+        console.log(params)
         return {
             data: {
                 msg: 'Pong'
             },
             code: 201,
-            headers: {
-                'Authorization': 'mest'
-            },
-            type: 'stub'
         }
     }
 }

@@ -1,4 +1,10 @@
+import LIVR from 'livr'
+import extraRules from 'livr-extra-rules'
+
 import { WrongArgument } from "../../error";
+import ErrorFromDevelopers from "../../error/ErrorFromDevelopers";
+
+LIVR.Validator.registerDefaultRules(extraRules)
 
 class Executable {
     constructor(args) {
@@ -22,15 +28,19 @@ class Executable {
     }
 
     validate(data) {
-        // // Cache validator
-        // const validator =
-        //     this.constructor.validator ||
-        //     new LIVR.Validator(this.constructor.validationRules).prepare()
-        // this.constructor.validator = validator
-        //
-        // return this._doValidationWithValidator(data, validator)
+        if (this.constructor.validationRules) {
+            try {
+                if (!this.constructor.validator) {
+                    this.constructor.validator = new LIVR.Validator(this.constructor.validationRules).prepare()
+                }
+            } catch (err) {
+                throw new ErrorFromDevelopers('wrong validation rules for ' + this.constructor.name)
+            }
 
-        return false
+            return this._doValidationWithValidator(data, this.constructor.validator)
+        } else {
+            return data
+        }
     }
 
     _doValidationWithValidator(data, validator) {
@@ -38,7 +48,7 @@ class Executable {
 
         if (!result) {
             return Promise.reject({
-                code: 'FORMAT_ERROR',
+                message: 'validation failed',
                 fields: validator.getErrors(),
             })
         }

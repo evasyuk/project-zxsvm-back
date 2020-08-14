@@ -18,7 +18,9 @@
     "koa-bodyparser": "^4.3.0",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.1",
-    "koa-router": "^9.1.0"
+    "koa-router": "^9.1.0",
+    "livr": "^2.3.1",
+    "livr-extra-rules": "^1.2.1"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",
