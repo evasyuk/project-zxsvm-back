@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js",
-    "test": "ava src/**/*.test.js"
+    "test": "ava src/**/*.test.js",
+    "build": "docker build -t evasyuk/project-zxsvm-back .",
+    "doc": "docker run -p 9119:9119 -d evasyuk/project-zxsvm-back"
   },
   "dependencies": {
     "@babel/polyfill": "^7.10.4",

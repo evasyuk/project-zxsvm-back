@@ -3,10 +3,12 @@ FROM node:12
 WORKDIR /usr/src/app
 
 COPY . /usr/src/app
-RUN npm install typescript -g
+
+RUN cd /usr/src/app
 RUN npm install
-RUN tsc /usr/src/app/index.оs
 
-EXPOSE 8881
+RUN npm rebuild sqlite3
 
-CMD [ "node", "/usr/src/app/index.js" ]
+EXPOSE 9119
+
+CMD [ "npm", "run", "start" ]
