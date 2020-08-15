@@ -1,9 +1,8 @@
 import { MyRouter } from '../helper/router'
-import { UserLogin, UserRegister } from '../actions'
+import { UserGet } from '../actions'
 
 const router = new MyRouter()
 
-router.post("/session/login", UserLogin)
-router.post("/session/register", UserRegister)
+router.get("/user/me", UserGet, { authEnabled: true })
 
 export default router

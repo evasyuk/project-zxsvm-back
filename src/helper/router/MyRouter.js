@@ -3,15 +3,11 @@ import { WrongArgument } from "../../error";
 import Executable from "./Exe";
 import { withAction } from "./exeRunner";
 
+import authMiddleware from "../../middlewares/authMiddleware";
+
 const router = new Router()
 
 class MyRouter {
-    _getAuth = (options) => {
-        if (options.authEnabled) {
-            return null
-        }
-        return null
-    }
 
     get = (name, executable, options = {
         authEnabled: false,
@@ -24,7 +20,11 @@ class MyRouter {
             throw new WrongArgument('executable')
         }
 
-        router.get(name, withAction(executable))
+        if (options.authEnabled) {
+            router.get(name, authMiddleware, withAction(executable))
+        } else {
+            router.get(name, withAction(executable))
+        }
     }
 
     post = (name, executable, options = {
@@ -38,7 +38,11 @@ class MyRouter {
             throw new WrongArgument('executable')
         }
 
-        router.post(name, withAction(executable))
+        if (options.authEnabled) {
+            router.post(name, authMiddleware, withAction(executable))
+        } else {
+            router.post(name, withAction(executable))
+        }
     }
 
     withApp = (app) => {

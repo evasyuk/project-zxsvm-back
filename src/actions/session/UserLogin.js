@@ -1,6 +1,7 @@
 import Exe from '../../helper/router/Exe'
-import {RepoUser} from "../../repository";
-import {UserNotFound, UserWrongCredentials} from "../../error";
+import { RepoUser } from "../../repository";
+import { UserNotFound, UserWrongCredentials } from "../../error";
+import { SessionHelper } from "../../helper/SessionHelper";
 
 class UserLogin extends Exe {
     static validationRules = {
@@ -25,8 +26,11 @@ class UserLogin extends Exe {
             throw new UserWrongCredentials()
         }
 
+        const token = await SessionHelper.generateToken({ user })
+
         return {
             data: {
+                token,
                 user,
             },
         }

@@ -5,6 +5,10 @@ class RepoUser {
         return SQLiteRepo.getUserByEmail(email)
     }
 
+    async getUserById (user_id) {
+        return SQLiteRepo.getUserById(user_id)
+    }
+
     async createUser (name, email, password) {
         return SQLiteRepo.createUser(name, email, password)
     }
