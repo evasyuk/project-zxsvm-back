@@ -6,4 +6,8 @@ loadCfg()
 ModuleConfig.init()
 
 require('./src/helper')
-require('./src/App')
+const app = require('./src/App').app
+
+export {
+  app
+}

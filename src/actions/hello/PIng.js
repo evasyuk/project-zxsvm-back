@@ -10,7 +10,7 @@ class Ping extends Exe {
     })
 
     async execute(params) {
-        console.log(params)
+        // console.log(params)
         return {
             data: {
                 msg: 'Pong'
