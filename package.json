@@ -44,8 +44,7 @@
     "ava": "^3.11.1",
     "eslint": "^7.5.0",
     "regenerator-runtime": "^0.13.7",
-    "typescript": "^3.9.7",
-    "@babel/register": "7.7.0"
+    "typescript": "^3.9.7"
   },
   "repository": {
     "type": "git",

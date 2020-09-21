@@ -5,7 +5,7 @@ export default class Log {
             Object.keys(arguments).forEach((key) => {
                 string += `[${arguments[key]}]`
             })
-            console.log(string)
+            // console.log(string)
         } else {
 
         }
@@ -13,6 +13,6 @@ export default class Log {
 }
 
 if (process.env.MODE !== 'DEV') {
-    console.log('warning: printf disabled')
+    // console.log('warning: printf disabled')
 }
 

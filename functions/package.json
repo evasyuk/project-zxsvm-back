@@ -6,7 +6,7 @@
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
+    "deploy": "BABEL_DISABLE_CACHE=1 firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
   "engines": {
@@ -14,13 +14,44 @@
   },
   "main": "index.js",
   "dependencies": {
-    "firebase-admin": "^8.10.0",
-    "firebase-functions": "^3.6.1"
+    "@babel/polyfill": "^7.10.4",
+    "@babel/register": "^7.11.5",
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.7",
+    "@babel/node": "7.8.7",
+    "@babel/plugin-proposal-class-properties": "7.8.3",
+    "@babel/plugin-proposal-export-default-from": "^7.10.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/preset-env": "7.8.7",
+    "axios": "^0.19.2",
+    "bcryptjs": "^2.4.3",
+    "crypto-js": "^4.0.0",
+    "dotenv": "^8.2.0",
+    "firebase-admin": "^9.2.0",
+    "firebase-functions": "^3.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-cookies": "^2.0.9",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^9.1.0",
+    "livr": "^2.3.1",
+    "livr-extra-rules": "^1.2.1",
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
-    "eslint": "^5.12.0",
     "eslint-plugin-promise": "^4.0.1",
-    "firebase-functions-test": "^0.2.0"
+    "firebase-functions-test": "^0.2.0",
+    "@ava/babel": "^1.0.1",
+    "@types/node": "^14.0.26",
+    "@typescript-eslint/eslint-plugin": "^3.7.1",
+    "@typescript-eslint/parser": "^3.7.1",
+    "apidoc": "0.17.7",
+    "ava": "^3.11.1",
+    "eslint": "^7.5.0",
+    "regenerator-runtime": "^0.13.7",
+    "typescript": "^3.9.7"
   },
   "private": true
 }

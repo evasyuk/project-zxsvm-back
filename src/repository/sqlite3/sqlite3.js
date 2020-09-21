@@ -29,7 +29,7 @@ class DBWrapper {
         return new Promise((acc, rej) => {
             db.all(cmd, (err, data) => {
                 if (err) {
-                    console.log(err)
+                    // console.log(err)
                     rej(err)
                 }
                 acc(data)

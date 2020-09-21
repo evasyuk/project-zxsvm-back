@@ -12,7 +12,7 @@ class CookieHelper {
             const token = SessionHelper.generateToken(payload)
             ctx.response.set(AUTH, token)
         } catch (err) {
-            console.log('cookieSetNewToken', err)
+            // console.log('cookieSetNewToken', err)
         }
     }
 

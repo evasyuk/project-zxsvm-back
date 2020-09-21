@@ -11,7 +11,7 @@ applyAllRoutes(app)
 app.enableListen = () => {
   const PORT = 9339
   app.listen(PORT, () => {
-      console.log(`node task planner started on port [${PORT}]`)
+      // console.log(`node task planner started on port [${PORT}]`)
   })
 }
 

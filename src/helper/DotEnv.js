@@ -7,7 +7,7 @@ export const loadCfg = ({ filename } = { filename: '.env' }) => {
         path: `${appDir}/../../${filename}`
     })
 
-    console.log('app mode: ' + process.env.MODE)
+    // console.log('app mode: ' + process.env.MODE)
 
     if (result.error) {
         throw result.error

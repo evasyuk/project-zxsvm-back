@@ -1,4 +1,4 @@
-import logger from "koa-logger"
+// import logger from "koa-logger"
 import json from "koa-json"
 import bodyParser from "koa-bodyparser"
 
@@ -13,11 +13,11 @@ const applyMiddlewares = (app) => {
     });
     app.use(bodyParser())
     app.use(json())
-    app.use(logger({
-        transporter: (str, args) => {
-            console.log(str)
-        }
-    }))
+    // app.use(logger({
+    //     transporter: (str, args) => {
+    //         // console.log(str)
+    //     }
+    // }))
 }
 
 export default applyMiddlewares
