@@ -1,6 +1,6 @@
 import Exe from '../../helper/router/Exe'
-import { RepoUser } from "../../repository";
-import { UserAlreadyExists } from "../../error";
+// import { RepoUser } from "../../repository";
+// import { UserAlreadyExists } from "../../error";
 
 class UserRegister extends Exe {
     static validationRules = {
