@@ -3,7 +3,7 @@ import { UserLogin, UserRegister } from '../actions'
 
 const router = new MyRouter()
 
-router.post("/session/login", UserLogin)
-router.post("/session/register", UserRegister)
+router.post("/v1/session/login", UserLogin)
+router.post("/v1/session/register", UserRegister)
 
 export default router

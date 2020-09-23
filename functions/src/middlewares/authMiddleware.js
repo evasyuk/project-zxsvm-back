@@ -1,3 +1,3 @@
 export default function (ctx, next) {
-  next()
+  return next()
 }

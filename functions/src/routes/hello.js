@@ -3,6 +3,6 @@ import { Ping } from '../actions/hello'
 
 const router = new MyRouter()
 
-router.get("/ping", Ping)
+router.get("/v1/ping", Ping)
 
 export default router

@@ -46,7 +46,9 @@ class MyRouter {
     }
 
     withApp = (app) => {
-        app.use(router.routes()).use(router.allowedMethods())
+        app
+          .use(router.routes())
+          .use(router.allowedMethods())
     }
 }
 

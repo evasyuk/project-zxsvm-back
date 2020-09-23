@@ -1,27 +1,27 @@
 import Exe from '../../helper/router/Exe'
-// import { RepoUser } from "../../repository";
-// import { UserAlreadyExists } from "../../error";
 
 class UserRegister extends Exe {
     static validationRules = {
         name: ['required', 'string'],
         email: ['required', 'trim', 'email'],
-        password: ['required', 'string'],
+        password: ['required', 'trim', 'string'],
+        phone: ['required', 'trim', 'string'],
     }
 
     static paramsBuilder = (ctx) => ({
-        name: ctx.request.body.name,
-        email: ctx.request.body.email,
-        password: ctx.request.body.password,
+        name: ctx.req?.body?.name,
+        email: ctx.req?.body?.email,
+        password: ctx.req?.body?.password,
+        phone: ctx.req?.body?.phone,
     })
 
-    async execute({ name, email, password }) {
-        const user = await RepoUser.getUserByEmail(email)
-        if (user.length) {
-            throw new UserAlreadyExists()
-        }
+    static contextBuilder = (ctx) => ({
+        fireadmin: ctx.fireadmin,
+    })
 
-        await RepoUser.createUser(name, email, password)
+    async execute({ name, email, password, phone }) {
+        // firebase auth throws error if account already exists
+        await this.registerUser(email, phone, password, name)
 
         return {
             data: {
@@ -29,6 +29,21 @@ class UserRegister extends Exe {
             },
             code: 201,
         }
+    }
+
+    async registerUser(email = "user@example.com",
+                       phone = "+11234567890",
+                       password = "secretPassword",
+                       displayName = "John Doe") {
+        return this.context.fireadmin.auth().createUser({
+            email,
+            emailVerified: false,
+            phoneNumber: phone,
+            password,
+            displayName,
+            // photoURL: "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
+            disabled: false
+        })
     }
 }
 

@@ -15,23 +15,23 @@ class UserLogin extends Exe {
     })
 
     async execute({ email, password }) {
-        const users = await RepoUser.getUserByEmail(email)
-        if (!users.length) {
-            throw new UserNotFound()
-        }
-
-        const user = users[0]
-
-        if (user.password !== password) {
-            throw new UserWrongCredentials()
-        }
-
-        const token = await SessionHelper.generateToken({ user })
+        // const users = await RepoUser.getUserByEmail(email)
+        // if (!users.length) {
+        //     throw new UserNotFound()
+        // }
+        //
+        // const user = users[0]
+        //
+        // if (user.password !== password) {
+        //     throw new UserWrongCredentials()
+        // }
+        //
+        // const token = await SessionHelper.generateToken({ user })
 
         return {
             data: {
-                token,
-                user,
+                // token,
+                // user,
             },
         }
     }

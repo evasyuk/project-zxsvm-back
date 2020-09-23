@@ -9,4 +9,8 @@ require("@babel/register")({
 require('@babel/polyfill')
 const app = require('./src/App').app
 
-exports.v1 = functions.https.onRequest(app.callback());
+exports.api = functions.https.onRequest(app.callback());
+
+exports.info = functions.https.onRequest((req, res) => {
+  res.send("/info");
+});
