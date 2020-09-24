@@ -1,7 +1,6 @@
-import Exe from '../../helper/router/Exe'
-// import { RepoUser } from "../../repository";
-// import { UserNotFound, UserWrongCredentials } from "../../error";
-// import { SessionHelper } from "../../helper/SessionHelper";
+import Exe from '../../helper/router/Exe';
+import FireAuthHelper from '../../helper/FireAuthHelper';
+import FirestoreHelper from '../../helper/FirestoreHelper';
 
 class UserLogin extends Exe {
     static validationRules = {
@@ -10,29 +9,46 @@ class UserLogin extends Exe {
     }
 
     static paramsBuilder = (ctx) => ({
-        email: ctx.request.body.email,
-        password: ctx.request.body.password,
+        email: ctx.req?.body?.email,
+        password: ctx.req?.body?.password,
+    })
+
+    static contextBuilder = (ctx) => ({
+        fireadmin: ctx.fireadmin,
     })
 
     async execute({ email, password }) {
-        // const users = await RepoUser.getUserByEmail(email)
-        // if (!users.length) {
-        //     throw new UserNotFound()
-        // }
-        //
-        // const user = users[0]
-        //
-        // if (user.password !== password) {
-        //     throw new UserWrongCredentials()
-        // }
-        //
-        // const token = await SessionHelper.generateToken({ user })
+        const {
+            success,
+            token,
+            message = ':/'
+        } = await FireAuthHelper.login({ fireadmin: this.context.fireadmin, email, password })
 
-        return {
-            data: {
-                // token,
-                // user,
-            },
+        if (success) {
+            const {
+                success,
+                message,
+                userRecord,
+            } = await FirestoreHelper.getUserByEmail({ fireadmin: this.context.fireadmin, email })
+
+            if (success) {
+                return {
+                    data: {
+                        token,
+                        userRecord,
+                    },
+                }
+            } else {
+                return {
+                    message,
+                    code: 401
+                }
+            }
+        } else {
+            return {
+                message,
+                code: 401
+            }
         }
     }
 }

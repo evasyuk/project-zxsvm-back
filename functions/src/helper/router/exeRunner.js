@@ -43,7 +43,7 @@ async function _renderPromiseAsJson(ctx, promise) {
         if (code === 200 || code === 201) {
             ContextHelper.success(ctx, payload, code)
         } else {
-            ContextHelper.error(ctx, message, code)
+            ContextHelper.errorMsg(ctx, message, code)
         }
     } catch (error) {
         ContextHelper.error(ctx, error, undefined, error.fields)
