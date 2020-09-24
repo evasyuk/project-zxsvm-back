@@ -43,19 +43,19 @@ class TokenHelper {
   }
 
   static decodeToken(token) {
-    let isSuccess = false
+    let success = false
     let message = null
     let decodedPayload = null
 
     try {
       decodedPayload = jwt.verify(token, JWT_SECRET)
-      isSuccess = true
+      success = true
     } catch (err) {
       message = err.message // TODO: can be simplified 'invalid token'
     }
 
     return {
-      isSuccess,
+      success,
       message,
       decodedPayload,
     }
