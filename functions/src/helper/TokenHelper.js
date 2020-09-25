@@ -1,4 +1,4 @@
-import { JWT_TTL, JWT_SECRET } from './Config'
+import { JWT_TTL, JWT_SECRET } from './AppConfigHelper'
 
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
