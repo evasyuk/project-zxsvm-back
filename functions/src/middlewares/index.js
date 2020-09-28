@@ -1,12 +1,14 @@
 import logger from "koa-logger"
 import json from "koa-json"
+import corsMiddleware from "./corsMiddleware"
 // import bodyParser from "koa-bodyparser"
 
-import fireAdminMiddleware from "./fireAdminMiddleware";
+import fireAdminMiddleware from "./fireAdminMiddleware"
 
 const applyMiddlewares = (app) => {
 
     // Middlewares
+    app.use(corsMiddleware)
     app.use(fireAdminMiddleware)
     app.use(async (ctx, next) => {
         const start = Date.now();
