@@ -52,9 +52,13 @@ class FireAuthHelper {
         success = false
         message = err.message
       }
-    } catch (ignore) {
+    } catch (error) {
       success = false
-      message = 'AUTH.EMAIL_ALREADY_IN_USE'
+      if (error?.code === 'auth/invalid-phone-number') {
+        message = error.message // 'The phone number must be a non-empty E.164 standard compliant identifier string.'
+      } else {
+        message = 'AUTH.EMAIL_ALREADY_IN_USE'
+      }
     }
 
     return {

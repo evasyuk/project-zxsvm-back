@@ -22,6 +22,40 @@ class UserRegister extends Exe {
     })
 
     async execute({ name, email, password, phone }) {
+        try {
+            const [success, token, message] = await this.register({ name, email, password, phone })
+            if (success) {
+                const [ success, message, userRecord] = await this.getUser(email)
+
+                if (success) {
+                    return {
+                        data: {
+                            token,
+                            userRecord,
+                        },
+                        code: 201
+                    }
+                } else {
+                    return {
+                        message,
+                        code: 401
+                    }
+                }
+            } else {
+                return {
+                    message,
+                    code: 400
+                }
+            }
+        } catch (error) {
+            return {
+                message: `AUTH.VALIDATION_ERROR`,
+                code: 400
+            }
+        }
+    }
+
+    register = async ({ email, phone, password, name, }) => {
         const {
             success,
             token,
@@ -33,36 +67,17 @@ class UserRegister extends Exe {
             password,
             name,
         })
-
-        if (success) {
-            const {
-                success,
-                message,
-                userRecord,
-            } = await FirestoreHelper.getUserByEmail({ fireadmin: this.context.fireadmin, email })
-
-            if (success) {
-                return {
-                    data: {
-                        token,
-                        userRecord,
-                    },
-                    code: 201
-                }
-            } else {
-                return {
-                    message,
-                    code: 401
-                }
-            }
-        } else {
-            return {
-                message,
-                code: 400
-            }
-        }
+        return [success, token, message]
     }
 
+    getUser = async (email) => {
+        const {
+            success,
+            message,
+            userRecord,
+        } = await FirestoreHelper.getUserByEmail({ fireadmin: this.context.fireadmin, email })
+        return [success, message, userRecord]
+    }
 }
 
 export default UserRegister

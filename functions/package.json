@@ -5,7 +5,6 @@
     "lint": "eslint .",
     "serve": "scripts/generate.app.config.sh && firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
-    "start": "npm run shell",
     "deploy": "scripts/generate.app.config.sh && firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
