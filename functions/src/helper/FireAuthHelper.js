@@ -1,5 +1,7 @@
 import TokenHelper from "./TokenHelper";
 
+const USER_HELPER_COL = 'userHelper'
+
 class FireAuthHelper {
   static async login({ fireadmin, email, password }) {
     let success = false
@@ -76,7 +78,7 @@ class FireAuthHelper {
   }
 
   static async _savePassword(fireadmin, email, passwordHash, uid) {
-    return fireadmin.firestore().collection('userHelper')
+    return fireadmin.firestore().collection(USER_HELPER_COL)
       .doc(email)
       .set({
         pHash: passwordHash,
@@ -90,7 +92,7 @@ class FireAuthHelper {
     let message = null
 
     try {
-      const snapshot = await fireadmin.firestore().collection('userHelper').doc(email).get()
+      const snapshot = await fireadmin.firestore().collection(USER_HELPER_COL).doc(email).get()
       userMeta = snapshot.data()
       // console.log('snapshot', snapshot)
       // console.log('userMeta', userMeta)
@@ -125,6 +127,24 @@ class FireAuthHelper {
       const passwordHash = TokenHelper.generateHash(password)
 
       await FireAuthHelper._savePassword(fireadmin, userRecord.email, passwordHash, userRecord.uid)
+    } catch (err) {
+      success = false
+      message = err.message
+    }
+
+    return {
+      success,
+      message,
+    }
+  }
+
+  static async deleteUser(fireadmin, userRecord) {
+    let success = true
+    let message = ':/'
+
+    try {
+      await fireadmin.auth().deleteUser(userRecord.uid)
+      await fireadmin.firestore().collection(USER_HELPER_COL).doc(userRecord.email).delete()
     } catch (err) {
       success = false
       message = err.message

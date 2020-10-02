@@ -49,7 +49,11 @@ export default async function(ctx, next) {
           uid: tokenDecodeSummary.decodedPayload.uid
         }
       } else {
-        return ContextHelper.error(ctx, operationResult.message, 500)
+        if (operationResult.message === 'There is no user record corresponding to the provided identifier.') {
+          return ContextHelper.error(ctx, 'AUTH.MIGHT_BE_DELETED', 401)
+        } else {
+          return ContextHelper.error(ctx, operationResult.message, 500)
+        }
       }
     } else {
       return ContextHelper.error(ctx, tokenDecodeSummary.message, 401)

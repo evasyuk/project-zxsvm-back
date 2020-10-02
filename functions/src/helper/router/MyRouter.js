@@ -7,6 +7,7 @@ import authMiddleware from "../../middlewares/authMiddleware";
 
 const router = new Router()
 
+// TODO: remove code duplication
 class MyRouter {
 
     get = (name, executable, options = {
@@ -42,6 +43,24 @@ class MyRouter {
             router.post(name, authMiddleware, withAction(executable))
         } else {
             router.post(name, withAction(executable))
+        }
+    }
+
+    delete = (name, executable, options = {
+        authEnabled: false,
+    }) => {
+        if (!name || typeof name != 'string') {
+            throw new WrongArgument('name')
+        }
+
+        if (!executable || !(executable['__proto__'].name === 'Executable')) {
+            throw new WrongArgument('executable')
+        }
+
+        if (options.authEnabled) {
+            router.delete(name, authMiddleware, withAction(executable))
+        } else {
+            router.delete(name, withAction(executable))
         }
     }
 

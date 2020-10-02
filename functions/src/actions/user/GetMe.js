@@ -6,10 +6,9 @@ class GetMe extends Exe {
     })
 
     async execute({ userRecord }) {
-        console.log('userRecord', userRecord)
         return {
             data: {
-                userRecord: userRecord,
+                userRecord,
             }
         }
     }
