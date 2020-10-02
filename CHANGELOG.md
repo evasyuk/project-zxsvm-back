@@ -5,8 +5,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- added new route "change user password" ("/v1/user/password/change")
-- delete user from the system
 - postman test runner with test-cases
 
 - user picture CDN
@@ -15,8 +13,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - improve custom router
 
-## [1.0.2] - 2020-10-03
+## [1.0.3] - 2020-10-03
+### Added
+- added "delete my user" route
+- added "change password" route
+- CHANGELOG added
 
+### Changed
+- improved authMiddleware, custom router
+- added new methods to FireAuthHelper (deleteUser, changePassword)
+
+
+## [1.0.2] - 2020-10-02
 ### Changed
 - enhanced ctx.state model with FireAuth 'uid' (ctx.state.uid)
 - fixed CORS middleware to handle incoming requests from different production sources
