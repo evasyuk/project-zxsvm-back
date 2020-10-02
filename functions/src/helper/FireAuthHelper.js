@@ -8,7 +8,7 @@ class FireAuthHelper {
 
     try {
       const result = await FireAuthHelper._verifyPassword(fireadmin, email, password)
-      if (result.isSuccess) {
+      if (result.success) {
         token = FireAuthHelper._getToken({ email, uid: result.userMeta.uid })
         success = true
       } else {
@@ -85,7 +85,7 @@ class FireAuthHelper {
   }
 
   static async _verifyPassword(fireadmin, email, password) {
-    let isSuccess = false
+    let success = false
     let userMeta = null
     let message = null
 
@@ -96,8 +96,8 @@ class FireAuthHelper {
       // console.log('userMeta', userMeta)
 
       if (userMeta) {
-        isSuccess = await TokenHelper.comparePassword(password, userMeta.pHash)
-        if (isSuccess) {
+        success = await TokenHelper.comparePassword(password, userMeta.pHash)
+        if (success) {
           delete userMeta.pHash
         } else {
           message = 'AUTH.WRONG_PASSWORD'
@@ -110,8 +110,28 @@ class FireAuthHelper {
     }
 
     return {
-      isSuccess,
+      success,
       userMeta,
+      message,
+    }
+  }
+
+  static async changePassword(fireadmin, userRecord, password) {
+    let success = true
+    let message = ':/'
+
+    try {
+      // firebase auth throws error if account already exists
+      const passwordHash = TokenHelper.generateHash(password)
+
+      await FireAuthHelper._savePassword(fireadmin, userRecord.email, passwordHash, userRecord.uid)
+    } catch (err) {
+      success = false
+      message = err.message
+    }
+
+    return {
+      success,
       message,
     }
   }

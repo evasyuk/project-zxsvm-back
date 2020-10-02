@@ -45,6 +45,9 @@ export default async function(ctx, next) {
 
       if (operationResult.success) {
         ctx.state.userRecord = operationResult.userRecord
+        ctx.state.user = {
+          uid: tokenDecodeSummary.decodedPayload.uid
+        }
       } else {
         return ContextHelper.error(ctx, operationResult.message, 500)
       }
