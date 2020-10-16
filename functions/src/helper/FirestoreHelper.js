@@ -10,9 +10,9 @@ class FirestoreHelper {
       userRecord = {
         email: _userRecord.email,
         emailVerified: _userRecord.emailVerified,
-        displayName: _userRecord.displayName,
+        displayName: _userRecord.displayName || "John Doe",
         phoneNumber: _userRecord.phoneNumber,
-        photoURL: _userRecord.photoURL,
+        photoURL: _userRecord.photoURL || null,
         disabled: _userRecord.disabled,
       }
 

@@ -27,7 +27,7 @@ class FireAuthHelper {
     }
   }
 
-  static async register({ fireadmin, email, phone, displayName, password }) {
+  static async register({ fireadmin, email, phone, name, password }) {
     let success = true
     let token = null
     let message = null
@@ -38,7 +38,7 @@ class FireAuthHelper {
         emailVerified: false,
         phoneNumber: phone,
         password,
-        displayName,
+        displayName: name,
         // photoURL: "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
         disabled: false
       })

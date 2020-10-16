@@ -11,6 +11,14 @@ const processToken = (ctx) => {
   
   let { authorization } = ctx.request.header
 
+  if (!authorization) {
+    message = 'AUTH.TOKEN_NOT_FOUND'
+    return {
+      success,
+      message,
+    }
+  }
+
   if (authorization.startsWith('Bearer ')) {
     authorization = authorization.substr(7)
   }
