@@ -64,6 +64,24 @@ class MyRouter {
         }
     }
 
+    put = (name, executable, options = {
+        authEnabled: false,
+    }) => {
+        if (!name || typeof name != 'string') {
+            throw new WrongArgument('name')
+        }
+
+        if (!executable || !(executable['__proto__'].name === 'Executable')) {
+            throw new WrongArgument('executable')
+        }
+
+        if (options.authEnabled) {
+            router.put(name, authMiddleware, withAction(executable))
+        } else {
+            router.put(name, withAction(executable))
+        }
+    }
+
     withApp = (app) => {
         app
           .use(router.routes())
