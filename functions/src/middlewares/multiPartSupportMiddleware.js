@@ -5,12 +5,12 @@ const fs = require('fs');
 const Busboy = require('busboy');
 
 const multiPartSupportMiddleware = async function(ctx, next) {
+  if (!ctx?.header['content-type']?.startsWith('multipart/form-data;')) {
+    return next()
+  }
+
   const finalPromise = new Promise((resolve, reject) => {
     try {
-      if (!ctx?.header['content-type']?.startsWith('multipart/form-data;')) {
-        return next()
-      }
-
       const { req } = ctx
       const busboy = new Busboy({ headers: ctx.req.headers });
       const tmpdir = os.tmpdir();
