@@ -17,17 +17,18 @@ class UpdateAvatarPicture extends Exe {
 
   static contextBuilder = (ctx) => ({
     fireadmin: ctx.fireadmin,
-    userRecord: ctx.state.userRecord.uid,
+    userRecord: ctx.state.userRecord,
+    uid: ctx.state.user.uid,
   })
 
-  async execute({ userRecord, picture }) {
+  async execute({ picture }) {
     validateUploadFile(picture)
 
     try {
-      userRecord.photoURL = await FireStorageHelper.updateAvatar({
+      this.context.userRecord.photoURL = await FireStorageHelper.updateAvatar({
         fireadmin: this.context.fireadmin,
         filePath: picture.path,
-        uid: userRecord.uid
+        uid: this.context.uid,
       })
     } catch (error) {
       console.log(error)
@@ -38,7 +39,7 @@ class UpdateAvatarPicture extends Exe {
 
     return {
       data: {
-        userRecord,
+        userRecord: this.context.userRecord,
       },
       code: 201,
     }
