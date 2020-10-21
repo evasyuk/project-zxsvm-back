@@ -8,10 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - postman test runner with test-cases
 
 - user picture CDN
-- user picture upload
-- user picture delete
 
 - improve custom router
+
+## [1.0.4] - 2020-10-22
+### Added
+- added "upload photo" route
+- added "delete photo" route
 
 ## [1.0.3] - 2020-10-03
 ### Added
