@@ -28,10 +28,24 @@ class FireStorageHelper {
     return storageObj.mediaLink
   }
 
-  // TODO: double-check!
-  static async deleteAvatar({ fireadmin, photoURL }) {
+  static _getPictureName(photoURL) {
+    if (!photoURL) {
+      throw Error('FireStorageHelper._getPictureName photoURL is required')
+    }
+    try {
+      // const photoURL = 'https://storage.googleapis.com/download/storage/v1/b/zxsvm-zxsvm-avatar_bucket/o/FB_IMG_1569088612618.jpg?generation=1603315294685134&alt=media'
+
+      const query = photoURL.split('?')
+      const parts = query[0].split('/')
+      return parts[parts.length-1]
+    } catch (error) {
+      throw Error('failed to get picture name')
+    }
+  }
+
+  static async deleteAvatar({ fireadmin, uid, photoURL }) {
     const bucket = FireStorageHelper._getBucket(fireadmin)
-    await bucket.file(photoURL).delete()
+    await bucket.file(FireStorageHelper._getPictureName(photoURL)).delete()
 
     await FireStorageHelper._fireAuthUpdate({ fireadmin, uid, photoURL: null })
   }

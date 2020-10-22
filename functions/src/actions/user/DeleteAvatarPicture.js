@@ -2,17 +2,18 @@ import Exe from '../../helper/router/Exe'
 
 import FireStorageHelper from '../../helper/FireStorageHelper'
 
-// TODO: double-check
-class UpdateAvatarPicture extends Exe {
+class DeleteAvatarPicture extends Exe {
   static contextBuilder = (ctx) => ({
     fireadmin: ctx.fireadmin,
-    uid: ctx.state.userRecord.uid,
+    uid: ctx.state.user.uid,
     photoURL: ctx.state.userRecord.photoURL,
   })
 
-  async execute({ uid, picture }) {
+  async execute() {
+    const { fireadmin, uid, photoURL } = this.context
+
     try {
-      await FireStorageHelper.deleteAvatar({ fireadmin: this.context.fireadmin, filePath: picture.path, uid })
+      await FireStorageHelper.deleteAvatar({ fireadmin, photoURL, uid })
     } catch (error) {
       console.log(error)
     }
@@ -26,4 +27,4 @@ class UpdateAvatarPicture extends Exe {
   }
 }
 
-export default UpdateAvatarPicture
+export default DeleteAvatarPicture
