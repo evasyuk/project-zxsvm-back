@@ -1,0 +1,631 @@
+{
+	"info": {
+		"_postman_id": "a778fc68-9cdd-497c-87f6-ec94c750ea14",
+		"name": "zxsvm-back",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ping",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_V1}}/ping?test=test",
+					"host": [
+						"{{URL_V1}}"
+					],
+					"path": [
+						"ping"
+					],
+					"query": [
+						{
+							"key": "test",
+							"value": "test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"3@3.com\",\n    \"password\": \"123456\",\n    \"name\": \"JV3\",\n    \"phone\": \"+380334610947\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_V1}}/session/register",
+					"host": [
+						"{{URL_V1}}"
+					],
+					"path": [
+						"session",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"3@3.com\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_V1}}/session/login",
+					"host": [
+						"{{URL_V1}}"
+					],
+					"path": [
+						"session",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"3@3.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_V1}}/session/login",
+							"host": [
+								"{{URL_V1}}"
+							],
+							"path": [
+								"session",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Function-Execution-Id",
+							"value": "rnbxwxv315i2"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "X-Response-Time",
+							"value": "6734ms"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "946fc571f5122c311bbc7482a2c0a808"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Sep 2020 17:57:50 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "404"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjNAMy5jb20iLCJ1aWQiOiJoTktNczF6NDRKYkhEUVd2YVFZSlJrR3RsdG4xIiwiaWF0IjoxNjAxMTQzMDY5LCJleHAiOjE2MDEyMjk0Njl9.mrT5IzcRs9Zrq-HYiroYuZNFI6f04ctNXvz0aFO6rU4\",\n        \"userRecord\": {\n            \"email\": \"3@3.com\",\n            \"emailVerified\": false,\n            \"phoneNumber\": \"+380334610947\",\n            \"disabled\": false\n        }\n    }\n}"
+				},
+				{
+					"name": "login user (wrong password)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"3@3.com\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_V1}}/session/login",
+							"host": [
+								"{{URL_V1}}"
+							],
+							"path": [
+								"session",
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Function-Execution-Id",
+							"value": "9ypz09oe9bvx"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "X-Response-Time",
+							"value": "7806ms"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "480171cc6a21871c6927b6584828a3bc;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Sep 2020 18:00:07 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "59"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"AUTH.WRONG_PASSWORD\"\n}"
+				},
+				{
+					"name": "login user (fail validation)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"3@3.com\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_V1}}/session/login",
+							"host": [
+								"{{URL_V1}}"
+							],
+							"path": [
+								"session",
+								"login"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Function-Execution-Id",
+							"value": "9ypz0m9mwznt"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "X-Response-Time",
+							"value": "3ms"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "2738c4058cb060f6b3274bd7f8b61bcd;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Sep 2020 18:00:31 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "103"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"validation failed\",\n    \"fields\": {\n        \"password\": \"REQUIRED\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "get my user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjNAMy5jb20iLCJ1aWQiOiJoTktNczF6NDRKYkhEUVd2YVFZSlJrR3RsdG4xIiwiaWF0IjoxNjAxNjcyMjQyLCJleHAiOjE2MDE3NTg2NDJ9.UVcNQ5G6euF8YWP1pK-fcfY-NycXOUcDNa-xqXIifCo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_V1}}/user/me",
+					"host": [
+						"{{URL_V1}}"
+					],
+					"path": [
+						"user",
+						"me"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "user me (wrong token)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_V1}}/user/me",
+							"host": [
+								"{{URL_V1}}"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Function-Execution-Id",
+							"value": "9ypzk6pkwrcb"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "X-Response-Time",
+							"value": "86ms"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "2276cc452cc1586a56049a1aaa545da8;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Sep 2020 17:59:34 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"AUTH.WRONG_TOKEN\"\n}"
+				},
+				{
+					"name": "user me (success)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_V1}}/user/me",
+							"host": [
+								"{{URL_V1}}"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Function-Execution-Id",
+							"value": "9ypzhciwcmps"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "X-Response-Time",
+							"value": "325ms"
+						},
+						{
+							"key": "X-Cloud-Trace-Context",
+							"value": "b767af6b9fe785f75d1e5d19546ec3de;o=1"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Sep 2020 17:59:06 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Google Frontend"
+						},
+						{
+							"key": "Content-Length",
+							"value": "186"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {\n        \"userRecord\": {\n            \"email\": \"3@3.com\",\n            \"emailVerified\": false,\n            \"phoneNumber\": \"+380334610947\",\n            \"disabled\": false\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "delete my user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjNAMy5jb20iLCJ1aWQiOiJoTktNczF6NDRKYkhEUVd2YVFZSlJrR3RsdG4xIiwiaWF0IjoxNjAxNjcyMjQyLCJleHAiOjE2MDE3NTg2NDJ9.UVcNQ5G6euF8YWP1pK-fcfY-NycXOUcDNa-xqXIifCo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL_V1}}/user/me",
+					"host": [
+						"{{URL_V1}}"
+					],
+					"path": [
+						"user",
+						"me"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete my user (fail: already deleted)",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL_V1}}/user/me",
+							"host": [
+								"{{URL_V1}}"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "61"
+						},
+						{
+							"key": "x-response-time",
+							"value": "781ms"
+						},
+						{
+							"key": "date",
+							"value": "Fri, 02 Oct 2020 23:01:29 GMT"
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"error\",\n    \"message\": \"AUTH.MIGHT_BE_DELETED\"\n}"
+				}
+			]
+		},
+		{
+			"name": "change user password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjNAMy5jb20iLCJ1aWQiOiJoTktNczF6NDRKYkhEUVd2YVFZSlJrR3RsdG4xIiwiaWF0IjoxNjAxNjcyMjQyLCJleHAiOjE2MDE3NTg2NDJ9.UVcNQ5G6euF8YWP1pK-fcfY-NycXOUcDNa-xqXIifCo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\": \"654321\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_V1}}/user/password/change",
+					"host": [
+						"{{URL_V1}}"
+					],
+					"path": [
+						"user",
+						"password",
+						"change"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "change user password (success)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"654321\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_V1}}/user/password/change",
+							"host": [
+								"{{URL_V1}}"
+							],
+							"path": [
+								"user",
+								"password",
+								"change"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "x-powered-by",
+							"value": "Express"
+						},
+						{
+							"key": "vary",
+							"value": "Origin"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "39"
+						},
+						{
+							"key": "x-response-time",
+							"value": "1973ms"
+						},
+						{
+							"key": "date",
+							"value": "Fri, 02 Oct 2020 22:03:42 GMT"
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"data\": {}\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}
