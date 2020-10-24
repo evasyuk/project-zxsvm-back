@@ -21,6 +21,23 @@ ZXSVM is the pet-project, which has several aims to hit:
 3. firebase --version
     - 8.10.0
 
+# Setup Firebase services
+ref: https://firebase.google.com/docs/cli
+
+0. install cli tools
+
+1. login to Google account
+
+2. init project
+
+3. Generate new service key at "Firebase console, settings, Firebase Admin SDK"
+
+4. Add service key to project and CI/CD(if necessary)
+
+5. Upgrade project to paid plan(setup billing info) in order to use networking feature(and some other)
+    - you can use Firebase console
+    - you can use GCP console
+    
 # Installation (dev)
 0. Get copy of sourcess
     - git clone "this repo"
